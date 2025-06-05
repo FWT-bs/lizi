@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栗吉AI - 测试机器人</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <div class="logo-container">
+                    <div class="chestnut-icon">🌰</div>
+                    <span class="brand-text">栗吉</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="index.html#benefits" class="nav-link">功能</a></li>
+                <li><a href="index.html#cta" class="nav-link">联系我们</a></li>
+                <li><a href="index.html#footer" class="nav-link">关于我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Demo Section -->
+    <section class="demo-section" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 160px;">
+        <div class="floating-chestnuts" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+            <div class="chestnut c1">🌰</div>
+            <div class="chestnut c2">🌰</div>
+            <div class="chestnut c3">🌰</div>
+            <div class="chestnut c4">🌰</div>
+            <div class="chestnut c5">🌰</div>
+            <div class="chestnut c6">🌰</div>
+            <div class="chestnut c7">🌰</div>
+            <div class="chestnut c8">🌰</div>
+            <div class="chestnut c9">🌰</div>
+            <div class="chestnut c10">🌰</div>
+            <div class="chestnut c11">🌰</div>
+            <div class="chestnut c12">🌰</div>
+            <div class="chestnut c13">🌰</div>
+            <div class="chestnut c14">🌰</div>
+            <div class="chestnut c15">🌰</div>
+        </div>
+        
+        <div style="text-align: center; z-index: 2; position: relative; max-width: 600px; padding: 2rem;">
+            <div class="bot-avatar" style="font-size: 4rem; margin-bottom: 1rem; animation: pulse 3s ease-in-out infinite;">🤖</div>
+            <h1 style="font-size: 2.5rem; font-weight: 700; color: var(--chestnut-primary); margin-bottom: 1rem;">栗吉AI 聊天机器人</h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem;">您可以在右下角找到聊天机器人。点击聊天按钮开始对话！</p>
+            <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius-large); box-shadow: var(--shadow-medium); border: 1px solid var(--chestnut-light);">
+                <p style="color: var(--text-primary); margin-bottom: 1rem;">✨ 欢迎体验栗吉AI的强大功能</p>
+                <ul style="text-align: left; color: var(--text-muted); line-height: 1.8;">
+                    <li>🔥 毫秒级响应速度</li>
+                    <li>🌍 多语言智能对话</li>
+                    <li>⚡ 24/7 全天候服务</li>
+                    <li>💡 精准问题解答</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="chatbot-wrapper" style="position: fixed; z-index: 9999; pointer-events: none;">
+        <script src='https://v2-bot.pages.dev/bot.js' data-theme=retro data-bot='website'></script>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
