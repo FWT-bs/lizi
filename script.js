@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initChatFunctionality();
     initSmoothScrolling();
     initStickyNavbar();
+    initChestnutPhysics();
     
     // Add scroll animation classes to elements
     addScrollAnimationClasses();
@@ -313,4 +314,162 @@ window.addEventListener('load', function() {
     setTimeout(() => {
         body.style.opacity = '1';
     }, 100);
-}); 
+});
+
+// Initialize Chestnut Physics Simulation
+function initChestnutPhysics() {
+    const chestnuts = document.querySelectorAll('.chestnut');
+    if (!chestnuts.length) return;
+
+    // Physics constants - adjusted for smoother motion
+    const baseGravity = 0.4; // Softer gravity
+    const maxVelocity = 20; // Maximum velocity
+    const dampening = 0.96; // Increased air resistance for smoother stops
+    const bounceFactor = 0.3; // Bounce intensity
+    let lastScrollY = window.scrollY || window.pageYOffset;
+
+    // Create physics data for each chestnut
+    const chestnutData = Array.from(chestnuts).map((chestnut, index) => {
+        const rect = chestnut.getBoundingClientRect();
+        const heroContainer = document.querySelector('.hero'); // Use .hero as the container
+        const heroRect = heroContainer.getBoundingClientRect();
+        
+        return {
+            element: chestnut,
+            mass: Math.random() * 0.8 + 0.7, // Mass between 0.7 (lighter) and 1.5 (heavier)
+            x: parseFloat(chestnut.style.left) || (Math.random() * 90 + 5), // Wider initial spread
+            y: parseFloat(chestnut.style.top) || (Math.random() * 20 + 40), // Start in middle-low area
+            vx: (Math.random() - 0.5) * 2, // Slightly more initial horizontal velocity
+            vy: 0, // Vertical velocity
+            initialX: parseFloat(chestnut.style.left) || (Math.random() * 90 + 5),
+            initialY: parseFloat(chestnut.style.top) || (Math.random() * 20 + 40), // Start in middle-low area
+            onGround: false,
+            size: parseFloat(getComputedStyle(chestnut).fontSize), // Get actual size
+            opacity: 1, // Start fully visible
+            rotation: Math.random() * 360
+        };
+    });
+
+    // Set initial positions and styles
+    chestnutData.forEach(data => {
+        const chestnut = data.element;
+        chestnut.style.position = 'absolute';
+        chestnut.style.left = data.x + '%';
+        chestnut.style.top = data.y + '%';
+        chestnut.style.opacity = data.opacity;
+        chestnut.style.transform = `rotate(${data.rotation}deg)`;
+        chestnut.style.transition = 'none'; // Remove CSS transitions for physics
+        chestnut.style.filter = 'drop-shadow(0 3px 6px rgba(80, 40, 0, 0.3))';
+    });
+
+    // Scroll Event Handling
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY || window.pageYOffset;
+        const scrollDelta = currentScrollY - lastScrollY;
+        
+        // Define base strengths for scroll effects - adjusted for smoother motion
+        const baseBoostStrength = Math.min(Math.abs(scrollDelta) * 0.2, 18);
+        const baseDownwardForce = Math.min(Math.abs(scrollDelta) * 0.08, 4);
+
+        if (scrollDelta > 0) { // Scrolled Down - chestnuts fly up
+            chestnutData.forEach(data => {
+                // Apply boost more readily
+                const effectiveBoost = baseBoostStrength / data.mass;
+                const randomBoostFactor = (Math.random() * 4) / data.mass;
+                
+                data.vy = -(effectiveBoost + randomBoostFactor);
+                data.vx += (Math.random() - 0.5) * 1; // Add more horizontal push
+                data.onGround = false;
+            });
+        } else if (scrollDelta < 0) { // Scrolled Up - chestnuts fall faster
+            chestnutData.forEach(data => {
+                if (!data.onGround) {
+                    // Heavier chestnuts are more affected by downward force
+                    const effectiveDownwardForce = baseDownwardForce * data.mass;
+                    data.vy += effectiveDownwardForce + baseGravity;
+                }
+            });
+        }
+
+        lastScrollY = currentScrollY;
+    });
+
+    // Animation Loop
+    function animate() {
+        const heroContainer = document.querySelector('.hero'); // Use .hero as the container
+        const containerHeight = heroContainer.offsetHeight;
+        const containerWidth = heroContainer.offsetWidth;
+
+        chestnutData.forEach(data => {
+            // Apply gravity
+            if (!data.onGround || data.vy < 0) {
+                data.vy += baseGravity;
+            }
+
+            // Apply velocity with dampening
+            data.vy *= dampening;
+            data.vx *= dampening;
+            
+            // Limit maximum velocity
+            data.vy = Math.max(-maxVelocity, Math.min(maxVelocity, data.vy));
+            data.vx = Math.max(-maxVelocity/2, Math.min(maxVelocity/2, data.vx));
+
+            // Update positions - reduced multiplier for smoother motion
+            data.y += data.vy * 0.1;
+            data.x += data.vx * 0.1;
+
+            // Collision with container bottom (ground) - MOVED DOWN to 90%
+            const groundLevel = 90 - (data.size / parseFloat(getComputedStyle(heroContainer).fontSize)) * 5;
+            if (data.y >= groundLevel) {
+                data.y = groundLevel;
+                if (Math.abs(data.vy) > 1) {
+                    data.vy *= -bounceFactor; // Bounce
+                    data.vx *= 0.8; // Reduce horizontal velocity on bounce
+                    data.onGround = false;
+                } else {
+                    data.vy = 0;
+                    data.vx *= 0.9; // Gradual stop
+                    data.onGround = true;
+                }
+            } else {
+                data.onGround = false;
+            }
+
+            // Collision with container sides
+            if (data.x <= 2) {
+                data.x = 2;
+                data.vx *= -0.5; // Bounce off left wall
+            } else if (data.x >= 98) {
+                data.x = 98;
+                data.vx *= -0.5; // Bounce off right wall
+            }
+
+            // Collision with container top
+            if (data.y <= 2) {
+                data.y = 2;
+                data.vy *= -0.3; // Small bounce off ceiling
+            }
+
+            // Update rotation based on movement
+            data.rotation += (data.vx + data.vy) * 0.5;
+
+            // Apply physics to DOM element
+            const chestnut = data.element;
+            chestnut.style.left = data.x + '%';
+            chestnut.style.top = data.y + '%';
+            chestnut.style.transform = `rotate(${data.rotation}deg)`;
+            
+            // Add subtle movement-based effects
+            if (Math.abs(data.vy) > 2) {
+                chestnut.style.filter = 'drop-shadow(0 5px 10px rgba(80, 40, 0, 0.4)) brightness(1.1)';
+            } else {
+                chestnut.style.filter = 'drop-shadow(0 3px 6px rgba(80, 40, 0, 0.3))';
+            }
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    // Start animation
+    animate();
+}

@@ -512,7 +512,44 @@ body {
     }
 }
 
-/* Floating Chestnuts */
+/* Chestnut Physics Canvas */
+#chestnutCanvas {
+    display: block;
+    margin: 20px auto;
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.4), rgba(135, 206, 235, 0.6));
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition-smooth);
+}
+
+#chestnutCanvas:hover {
+    box-shadow: var(--shadow-strong);
+    transform: scale(1.02);
+}
+
+.scroll-hint {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.scroll-hint p {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Floating Chestnuts with Physics */
 .floating-chestnuts {
     position: absolute;
     top: 0;
@@ -521,15 +558,20 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
 }
 
 .chestnut {
     position: absolute;
-    font-size: 2rem;
-    filter: drop-shadow(0 4px 8px rgba(139, 69, 19, 0.3));
-    transition: all 0.3s ease;
+    font-size: 1.5rem; /* Reduced size for better scale */
+    filter: drop-shadow(0 2px 4px rgba(80, 40, 0, 0.25)); /* Softer shadow */
+    transition: none !important; /* Disable CSS transitions for physics */
     cursor: pointer;
     user-select: none;
+    pointer-events: auto;
+    z-index: 2;
+    opacity: 1; /* Fully visible */
+    will-change: transform, filter; /* Optimize for animations */
 }
 
 .chestnut:hover {
@@ -539,125 +581,27 @@ body {
     z-index: 10;
 }
 
-.chestnut.c1 {
-    top: 8%;
-    left: 12%;
-    animation: float 9s ease-in-out infinite;
-    animation-delay: 0s;
-    font-size: 2.2rem;
-}
-
-.chestnut.c2 {
-    top: 15%;
-    right: 18%;
-    animation: floatSlow 12s ease-in-out infinite;
-    animation-delay: 1.5s;
-    font-size: 1.8rem;
-}
-
-.chestnut.c3 {
-    bottom: 35%;
-    left: 8%;
-    animation: floatBounce 7s ease-in-out infinite;
-    animation-delay: 3s;
-    font-size: 2rem;
-}
-
-.chestnut.c4 {
-    bottom: 12%;
-    right: 15%;
-    animation: floatWave 10s ease-in-out infinite;
-    animation-delay: 4.5s;
-    font-size: 2.1rem;
-}
-
-.chestnut.c5 {
-    top: 45%;
-    left: 3%;
-    animation: float 8s ease-in-out infinite;
-    animation-delay: 6s;
-    font-size: 1.9rem;
-}
-
-.chestnut.c6 {
-    top: 5%;
-    left: 45%;
-    animation: floatSlow 11s ease-in-out infinite;
-    animation-delay: 2s;
-    font-size: 2.3rem;
-}
-
-.chestnut.c7 {
-    bottom: 8%;
-    right: 45%;
-    animation: floatBounce 9s ease-in-out infinite;
-    animation-delay: 7s;
-    font-size: 1.7rem;
-}
-
-.chestnut.c8 {
-    top: 65%;
-    right: 8%;
-    animation: floatWave 8.5s ease-in-out infinite;
-    animation-delay: 1s;
-    font-size: 2rem;
-}
-
-.chestnut.c9 {
-    top: 25%;
-    left: 30%;
-    animation: float 10s ease-in-out infinite;
-    animation-delay: 8s;
-    font-size: 1.6rem;
-}
-
-.chestnut.c10 {
-    top: 75%;
-    left: 25%;
-    animation: floatSlow 13s ease-in-out infinite;
-    animation-delay: 3.5s;
-    font-size: 2.4rem;
-}
-
-.chestnut.c11 {
-    bottom: 25%;
-    right: 30%;
-    animation: floatBounce 8s ease-in-out infinite;
-    animation-delay: 5.5s;
-    font-size: 1.8rem;
-}
-
-.chestnut.c12 {
-    top: 35%;
-    right: 5%;
-    animation: floatWave 11.5s ease-in-out infinite;
-    animation-delay: 2.5s;
-    font-size: 2.1rem;
-}
-
-.chestnut.c13 {
-    bottom: 50%;
-    left: 35%;
-    animation: float 9.5s ease-in-out infinite;
-    animation-delay: 6.5s;
-    font-size: 1.9rem;
-}
-
-.chestnut.c14 {
-    top: 55%;
-    left: 70%;
-    animation: floatSlow 14s ease-in-out infinite;
-    animation-delay: 4s;
-    font-size: 2.2rem;
-}
-
-.chestnut.c15 {
-    bottom: 60%;
-    right: 12%;
-    animation: floatBounce 7.5s ease-in-out infinite;
-    animation-delay: 9s;
-    font-size: 1.7rem;
-}
+/* Initial chestnut positions - these will be overridden by physics */
+.chestnut.c1 { top: 10%; left: 15%; }
+.chestnut.c2 { top: 20%; left: 85%; }
+.chestnut.c3 { top: 70%; left: 10%; }
+.chestnut.c4 { top: 80%; left: 90%; }
+.chestnut.c5 { top: 50%; left: 5%; }
+.chestnut.c6 { top: 8%; left: 50%; }
+.chestnut.c7 { top: 88%; left: 60%; }
+.chestnut.c8 { top: 65%; left: 95%; }
+.chestnut.c9 { top: 30%; left: 30%; }
+.chestnut.c10 { top: 75%; left: 25%; }
+.chestnut.c11 { top: 85%; left: 75%; }
+.chestnut.c12 { top: 40%; left: 98%; }
+.chestnut.c13 { top: 55%; left: 40%; }
+.chestnut.c14 { top: 60%; left: 70%; }
+.chestnut.c15 { top: 45%; left: 88%; }
+.chestnut.c16 { top: 25%; left: 65%; }
+.chestnut.c17 { top: 80%; left: 20%; }
+.chestnut.c18 { top: 15%; left: 78%; }
+.chestnut.c19 { top: 70%; left: 55%; }
+.chestnut.c20 { top: 90%; left: 45%; }
 
 @keyframes float {
     0% {
