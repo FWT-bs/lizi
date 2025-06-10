@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>栗子聊天機器人平台</title>
+    <title>联系我们 - 栗子聊天機器人平台</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -20,8 +20,8 @@
                 </div>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">首页</a></li>
-                <li><a href="#benefits" class="nav-link">功能</a></li>
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="index.html#benefits" class="nav-link">功能</a></li>
                 <li><a href="test-bot.html" class="nav-link">测试机器人</a></li>
                 <li><a href="pricing.html" class="nav-link">价格</a></li>
                 <li><a href="contact.html" class="nav-link">联系我们</a></li>
@@ -30,7 +30,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="contact-hero" class="hero">
         <div class="floating-chestnuts">
             <div class="chestnut c1">🌰</div>
             <div class="chestnut c2">🌰</div>
@@ -55,64 +55,80 @@
         </div>
         <div class="hero-content-centered">
             <div class="hero-text-center">
-                <h1 class="hero-title-large">栗子聊天機器人平台</h1>
-                <p class="hero-subtitle-large">栗即回答所有客戶問題</p>
-                <div class="hero-buttons-center">
-                    <button class="btn btn-primary-large" onclick="scrollToCTA()">
-                        <span>开始免费试用</span>
-                        <div class="btn-ripple"></div>
-                    </button>
-                    <button class="btn btn-secondary-large">了解更多</button>
-                </div>
-            </div>
-            <div class="hero-animation">
-                <div class="scroll-hint">
-                    <p>滚动页面与栗子互动！</p>
-                </div>
+                <h1 class="hero-title-large">联系我们</h1>
+                <p class="hero-subtitle-large">我们很乐意听取您的意见</p>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
+    <!-- Contact Section -->
+    <section id="contact" class="benefits">
         <div class="container">
-            <div class="benefits-header">
-                <h2 class="benefits-title">始终在线. 始终有用. 始终高效.</h2>
-                <p class="benefits-subtitle">只有栗吉AI才能做到。</p>
-                <button class="benefits-trial-btn">立即免费试用</button>
-            </div>
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>极速响应</h3>
-                    <p>用户在几秒钟内就能获得答案，而不是几分钟。更快的响应意味着更满意的客户和更少的错失机会。</p>
+                    <div class="benefit-icon">📧</div>
+                    <h3>发送消息</h3>
+                    <p>填写下表，我们会尽快回复您</p>
+                    <div class="contact-form-container">
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name">姓名</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">电子邮件</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">消息</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-large">
+                                <span>发送消息</span>
+                                <div class="btn-ripple"></div>
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon">🌍</div>
-                    <h3>多语言支持</h3>
-                    <p>与世界各地的用户流畅交流。我们打破语言障碍，让每位用户都感到宾至如归。</p>
+                    <div class="benefit-icon">💬</div>
+                    <h3>即时聊天</h3>
+                    <p>与我们的AI助手实时交流，立即获取帮助</p>
+                    <button class="btn btn-primary-large" onclick="window.location.href='test-bot.html'">
+                        <span>开始聊天</span>
+                        <div class="btn-ripple"></div>
+                    </button>
                 </div>
                 <div class="benefit-card">
-                    <div class="benefit-icon">🤖</div>
-                    <h3>智能自动化</h3>
-                    <p>让AI处理常见问题、确认信息和夜间咨询，这样您的团队就能专注于最重要的事情。</p>
+                    <div class="benefit-icon">📞</div>
+                    <h3>预约咨询</h3>
+                    <p>与我们的专家进行深入讨论，获取个性化建议</p>
+                    <div class="contact-info">
+                        <p><strong>营业时间:</strong><br>周一至周五 9:00-18:00</p>
+                        <p><strong>响应时间:</strong><br>通常在24小时内回复</p>
+                    </div>
+                    <button class="btn btn-secondary-large">
+                        <span>预约咨询</span>
+                        <div class="btn-ripple"></div>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section id="cta" class="cta-section">
+    <!-- CTA Section -->
+    <section id="contact-cta" class="cta-section">
         <div class="container">
             <div class="cta-header">
-                <h2 class="cta-title">美好客户体验，从对话开始</h2>
+                <h2 class="cta-title">准备开始您的AI之旅？</h2>
+                <p>让栗吉AI为您的业务带来革命性改变</p>
             </div>
             <div class="cta-cards">
                 <div class="cta-card">
                     <div class="cta-card-content">
-                        <h3>联系专人</h3>
-                        <p>依照您的需求提供最适合您的商业解决方案与方案！</p>
-                        <button class="cta-btn">与专人联系</button>
+                        <h3>免费试用</h3>
+                        <p>立即开始免费试用，体验栗吉AI的强大功能</p>
+                        <button class="cta-btn" onclick="window.location.href='test-bot.html'">开始试用</button>
                     </div>
                     <div class="cta-illustration">
                         <div class="illustration-person person-1">
@@ -126,9 +142,9 @@
                 </div>
                 <div class="cta-card">
                     <div class="cta-card-content">
-                        <h3>获取产品演示</h3>
-                        <p>预约个性化演示，了解栗吉AI如何为您的业务带来革命性改变！</p>
-                        <button class="cta-btn" onclick="window.open('test-bot.html', '_blank')">获取演示</button>
+                        <h3>查看定价</h3>
+                        <p>浏览我们的定价方案，找到最适合您的选择</p>
+                        <button class="cta-btn" onclick="window.location.href='pricing.html'">查看定价</button>
                     </div>
                     <div class="cta-illustration">
                         <div class="illustration-person person-2">
@@ -151,11 +167,11 @@
                 <div class="footer-section">
                     <h4>栗子AI</h4>
                     <ul>
-                        <li><a href="#home">首页</a></li>
+                        <li><a href="index.html#home">首页</a></li>
                         <li><a href="pricing.html">价格</a></li>
                         <li><a href="test-bot.html">获取演示</a></li>
                         <li><a href="test-bot.html">试用聊天机器人</a></li>
-                        <li><a href="#benefits">聊天机器人功能</a></li>
+                        <li><a href="index.html#benefits">聊天机器人功能</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -172,7 +188,7 @@
                     <ul>
                         <li><a href="#">常见问题</a></li>
                         <li><a href="#">帮助中心</a></li>
-                        <li><a href="#">联系支持</a></li>
+                        <li><a href="contact.html">联系支持</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
