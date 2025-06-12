@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栗子聊天機器人 - 后台管理</title>
+    <meta name="description" content="栗子聊天機器人系统后台管理。">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: var(--gradient-warm);
+        }
+
+        .admin-header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .admin-title {
+            color: var(--chestnut-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .admin-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius-large);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-strong);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .card-title {
+            color: var(--chestnut-primary);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--chestnut-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            border-radius: var(--border-radius);
+            background: white;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--chestnut-primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--chestnut-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--chestnut-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .response-container {
+            background: rgba(139, 69, 19, 0.05);
+            border: 2px solid rgba(139, 69, 19, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .link-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .link-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            border-radius: var(--border-radius);
+            background: rgba(139, 69, 19, 0.05);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .link-input:focus {
+            outline: none;
+            border-color: var(--chestnut-primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .copy-btn {
+            background: var(--chestnut-secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .copy-btn:hover:not(:disabled) {
+            background: var(--chestnut-primary);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(139, 69, 19, 0.9);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+            z-index: 10;
+        }
+
+        .copy-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(139, 69, 19, 0.9);
+        }
+
+        .copy-btn:hover .copy-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chestnut-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            animation: rotate 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                padding-top: 80px;
+            }
+            
+            .admin-container {
+                padding: 0 1rem;
+            }
+            
+            .admin-card {
+                padding: 2rem;
+            }
+            
+            .admin-title {
+                font-size: 2rem;
+            }
+            
+            .link-container {
+                flex-direction: column;
+            }
+            
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <div class="chestnut-icon">🌰</div>
+                        <span class="brand-text">栗子</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">首页</a></li>
+                <li><a href="index.html#benefits" class="nav-link">功能</a></li>
+                <li><a href="test-bot.html" class="nav-link">测试机器人</a></li>
+                <li><a href="pricing.html" class="nav-link">价格</a></li>
+                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="admin-header">
+            <h1 class="admin-title">🌰 后台管理 API</h1>
+        </div>
+
+        <div class="admin-container">
+            <div class="admin-card">
+                <h2 class="card-title">创建机器人密钥</h2>
+                
+                <form id="create-bot-form">
+                    <div class="form-group">
+                        <label class="form-label">密码</label>
+                        <input type="password" id="password" class="form-input" placeholder="请输入密码">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">机器人名称 (多个请用逗号分隔)</label>
+                        <input type="text" id="bot" class="form-input" placeholder="请输入机器人名称">
+                    </div>
+                    
+                    <button id="submit-btn" type="submit" class="submit-btn">
+                        <span class="chestnut-icon">🌰</span>
+                        提交 API 请求
+                    </button>
+                </form>
+            </div>
+            
+            <div class="admin-card">
+                <h2 class="card-title">响应结果</h2>
+                <div id="response" class="response-container">暂无响应</div>
+            </div>
+            
+            <div class="admin-card">
+                <h2 class="card-title">生成的链接</h2>
+                <div class="link-container">
+                    <input id="link-input" type="text" readonly class="link-input" placeholder="生成的链接将显示在这里" value="">
+                    <button id="copy-btn" class="copy-btn" disabled>
+                        <div class="copy-tooltip" id="copy-tooltip">复制链接</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>栗子AI</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="pricing.html">价格</a></li>
+                        <li><a href="test-bot.html">获取演示</a></li>
+                        <li><a href="index.html">聊天机器人</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="contact.html">联系支持</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>法律</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">隐私政策</a></li>
+                        <li><a href="terms-of-service.html">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 栗子AI 2025. 保留所有权利.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <span>关注我们</span>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📺</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('#create-bot-form').submit(function(e) {
+                e.preventDefault();
+                
+                const password = $('#password').val();
+                const botInput = $('#bot').val();
+                
+                // Handle bot as string or list based on comma separation
+                let bot = botInput;
+                if (botInput.includes(',')) {
+                    bot = botInput.split(',').map(item => item.trim());
+                }
+                
+                // Prepare the data
+                const requestData = {
+                    password: password,
+                    bot: bot,
+                };
+                
+                // Show loading indicator
+                $('#response').text('加载中...');
+                $('#link-input').val('');
+                $('#copy-btn').prop('disabled', true);
+                
+                // Make the API call
+                $.ajax({
+                    url: 'https://messenger-hcai.fly.dev/messenger/auth/create-bot-secret',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(requestData),
+                    success: function(response) {
+                        console.log('Success:', response);
+                        $('#response').text(JSON.stringify(response, null, 2));
+                        const bot = encodeURIComponent(JSON.stringify(Object.keys(response)));
+                        const bot_secret = encodeURIComponent(JSON.stringify(Object.values(response)));
+                        const generatedLink = `https://lizibot.com/messenger/start?bot=${bot}&bot_secret=${bot_secret}`;
+                        $('#link-input').val(generatedLink);
+                        $('#copy-btn').prop('disabled', false);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', xhr.responseText);
+                        $('#response').text('错误: ' + xhr.responseText);
+                        $('#link-input').val('');
+                        $('#copy-btn').prop('disabled', true);
+                    }
+                });
+            });
+            
+            // Copy to clipboard functionality
+            $('#copy-btn').click(function() {
+                const linkInput = $('#link-input');
+                linkInput.select();
+                document.execCommand('copy');
+                
+                // Change tooltip text
+                $('#copy-tooltip').text('已复制!');
+                
+                // Reset tooltip text after 2 seconds
+                setTimeout(function() {
+                    $('#copy-tooltip').text('复制链接');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html> 
