@@ -3,9 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>栗子聊天機器人平台</title>
+    <title>栗吉科技 - 智能解决方案领导者</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Dropdown Menu Styles */
+        .nav-dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+        }
+        
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            border: none;
+        }
+        
+        .dropdown-link:hover {
+            background-color: #e8f0ff;
+            color: #667eea;
+        }
+        
+        .nav-dropdown > .nav-link {
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        /* Custom Homepage Color Theme - Blue Purple */
+        .org-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .org-hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        
+        .org-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .org-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: #e8f0ff;
+        }
+        
+        .services-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f0ff 100%);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+            border: 2px solid #667eea;
+        }
+        
+        .service-card.featured {
+            border: 2px solid #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .service-card.featured .service-title {
+            color: #fff;
+        }
+        
+        .service-description {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #4a4a4a;
+        }
+        
+        .service-card.featured .service-description {
+            color: #e8f0ff;
+        }
+        
+        .service-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .service-card.featured .service-btn {
+            background: white;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .service-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .about-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #764ba2;
+        }
+        
+        /* Override main hero section colors for homepage */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        
+        .hero-title-large {
+            background: linear-gradient(45deg, #fff, #f0f0f0) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .hero-subtitle-large {
+            color: #e8f0ff !important;
+        }
+        
+        .btn-primary-large {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: white !important;
+            font-weight: 600 !important;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+        }
+        
+        .btn-primary-large:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .btn-secondary-large {
+            background: transparent !important;
+            color: #e8f0ff !important;
+            border: 2px solid #fff !important;
+        }
+        
+        .btn-secondary-large:hover {
+            background: #fff !important;
+            color: #667eea !important;
+        }
+        
+        /* Benefits section override for homepage */
+        .benefits {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f0ff 100%) !important;
+        }
+        
+        .benefit-card {
+            border: 2px solid transparent !important;
+        }
+        
+        .benefit-card:hover {
+            border: 2px solid #667eea !important;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15) !important;
+        }
+        
+        .benefits-title {
+            color: #667eea !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .benefits-subtitle {
+            color: #764ba2 !important;
+        }
+        
+        /* CTA section override for homepage */
+        .cta-title {
+            color: #667eea !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+    </style>
 </head>
 <body>
     <div class="background-animation"></div>
@@ -14,19 +305,26 @@
     <header class="header">
         <nav class="navbar">
             <div class="nav-brand">
-                <a href="homepage.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                     <div class="logo-container">
                         <div class="chestnut-icon">🌰</div>
-                        <span class="brand-text">栗子</span>
+                        <span class="brand-text">栗吉科技</span>
                     </div>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="homepage.html" class="nav-link">首页</a></li>
-                <li><a href="#benefits" class="nav-link">功能</a></li>
-                <li><a href="test-bot.html" class="nav-link">测试机器人</a></li>
-                <li><a href="pricing.html" class="nav-link">价格</a></li>
-                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link">Platform Features ▲</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="chatbot.html" class="dropdown-link">Chatbot</a></li>
+                        <li><a href="#" class="dropdown-link">Mobile Check-In</a></li>
+                        <li><a href="#" class="dropdown-link">Booking Engine</a></li>
+                        <li><a href="#" class="dropdown-link">Social Media Integrations</a></li>
+                    </ul>
+                </li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="test-bot.html" class="nav-link">Get Demo</a></li>
             </ul>
         </nav>
     </header>
@@ -44,107 +342,103 @@
             <div class="chestnut c8">🌰</div>
             <div class="chestnut c9">🌰</div>
             <div class="chestnut c10">🌰</div>
-            <div class="chestnut c11">🌰</div>
-            <div class="chestnut c12">🌰</div>
-            <div class="chestnut c13">🌰</div>
-            <div class="chestnut c14">🌰</div>
-            <div class="chestnut c15">🌰</div>
-            <div class="chestnut c16">🌰</div>
-            <div class="chestnut c17">🌰</div>
-            <div class="chestnut c18">🌰</div>
-            <div class="chestnut c19">🌰</div>
-            <div class="chestnut c20">🌰</div>
         </div>
         <div class="hero-content-centered">
             <div class="hero-text-center">
-                <div class="hero-title-container">
-                    <div class="social-icons-left">
-                        <img src=imgs/facebook.png alt="LINE" class="social-icon-animated">
-                        <img src=imgs/messenger.png alt="Messenger" class="social-icon-animated">
-                    </div>
-                    <h1 class="hero-title-large">栗子聊天機器人平台</h1>
-                    <div class="social-icons-right">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="social-icon-animated">
-                        <img src=imgs/LINE.png alt="LINE" class="social-icon-animated">
-                    </div>
-                </div>
-                <p class="hero-subtitle-large">栗即回答所有客戶問題</p>
+                <h1 class="hero-title-large">栗吉科技</h1>
+                <p class="hero-subtitle-large">栗吉聊天機器人幫你打造完美數位服務</p>
+                <p style="font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto 2rem; color: var(--text-primary);">
+                    我们致力于为企业提供创新的AI技术、智能客服系统、数据分析平台等全方位数字化服务
+                </p>
                 <div class="hero-buttons-center">
-                    <button class="btn btn-primary-large" onclick="scrollToCTA()">
-                        <span>开始免费试用</span>
+                    <button class="btn btn-primary-large" onclick="window.location.href='#services'">
+                        <span>探索我们的服务</span>
                         <div class="btn-ripple"></div>
                     </button>
-                    <button class="btn btn-secondary-large">了解更多</button>
+                    <button class="btn btn-secondary-large" onclick="window.location.href='#about'">了解更多</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
+    <!-- Services Section -->
+    <section id="services" class="benefits" style="background: #f8f9fa;">
         <div class="container">
             <div class="benefits-header">
-                <h2 class="benefits-title">始终在线. 始终有用. 始终高效.</h2>
-                <p class="benefits-subtitle">只有栗吉AI才能做到。</p>
-                <button class="benefits-trial-btn">立即免费试用</button>
+                <h2 class="benefits-title">我们的服务</h2>
+                <p class="benefits-subtitle">为企业提供全方位的数字化解决方案</p>
             </div>
             <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">⚡</div>
-                    <h3>极速响应</h3>
-                    <p>用户在几秒钟内就能获得答案，而不是几分钟。更快的响应意味着更满意的客户和更少的错失机会。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🌍</div>
-                    <h3>多语言支持</h3>
-                    <p>与世界各地的用户流畅交流。我们打破语言障碍，让每位用户都感到宾至如归。</p>
-                </div>
-                <div class="benefit-card">
+                <div class="benefit-card" style="border: 2px solid var(--chestnut-primary); background: var(--gradient-primary); color: var(--text-light);">
                     <div class="benefit-icon">🤖</div>
-                    <h3>智能自动化</h3>
-                    <p>让AI处理常见问题、确认信息和夜间咨询，这样您的团队就能专注于最重要的事情。</p>
+                    <h3>栗子聊天机器人</h3>
+                    <p>我们的旗舰产品 - 智能AI聊天机器人平台。支持多平台集成，提供24/7客户服务，显著提升客户满意度和运营效率。</p>
+                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="window.location.href='index.html'">了解详情</button>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>数据分析平台</h3>
+                    <p>先进的大数据分析解决方案，帮助企业从海量数据中提取有价值的洞察，做出更明智的商业决策。</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">即将推出</button>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">☁️</div>
+                    <h3>云计算服务</h3>
+                    <p>安全可靠的云基础设施服务，包括云存储、云计算和云部署，为企业提供灵活可扩展的技术支持。</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">即将推出</button>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>企业数字化咨询</h3>
+                    <p>专业的数字化转型咨询服务，为企业制定个性化的数字化战略，指导企业成功实现转型升级。</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">咨询服务</button>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>网络安全解决方案</h3>
+                    <p>全面的网络安全防护体系，包括数据加密、威胁检测、安全审计等，保护企业数字资产安全。</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">即将推出</button>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3>移动应用开发</h3>
+                    <p>定制化移动应用开发服务，覆盖iOS和Android平台，为企业打造专属的移动端解决方案。</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;">定制开发</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section id="cta" class="cta-section">
+    <!-- About Section -->
+    <section id="about" class="cta-section">
         <div class="container">
             <div class="cta-header">
-                <h2 class="cta-title">美好客户体验，从对话开始</h2>
+                <h2 class="cta-title">关于栗吉科技</h2>
             </div>
-            <div class="cta-cards">
-                <div class="cta-card">
-                    <div class="cta-card-content">
-                        <h3>联系专人</h3>
-                        <p>依照您的需求提供最适合您的商业解决方案与方案！</p>
-                        <button class="cta-btn">与专人联系</button>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 2rem;">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 2rem;">
+                    栗吉科技成立于2020年，是一家专注于人工智能和数字化解决方案的创新型技术公司。我们汇聚了来自全球顶尖大学和科技公司的优秀人才，致力于用先进的AI技术赋能传统行业，推动企业数字化转型。
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 3rem;">
+                    我们的旗舰产品"栗子聊天机器人"已服务超过500家企业客户，处理了数百万次客户对话，显著提升了客户服务效率和满意度。未来，我们将继续扩展产品线，为客户提供更全面的数字化解决方案。
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                    <div style="text-align: center;">
+                        <span style="font-size: 3rem; font-weight: 700; color: var(--chestnut-primary); display: block;">500+</span>
+                        <span style="font-size: 1.1rem; color: var(--text-muted);">企业客户</span>
                     </div>
-                    <div class="cta-illustration">
-                        <div class="illustration-person person-1">
-                            <div class="person-head"></div>
-                            <div class="person-body"></div>
-                            <div class="person-arm-left"></div>
-                            <div class="person-arm-right"></div>
-                            <div class="chestnut-float">🌰</div>
-                        </div>
+                    <div style="text-align: center;">
+                        <span style="font-size: 3rem; font-weight: 700; color: var(--chestnut-primary); display: block;">1000万+</span>
+                        <span style="font-size: 1.1rem; color: var(--text-muted);">对话处理</span>
                     </div>
-                </div>
-                <div class="cta-card">
-                    <div class="cta-card-content">
-                        <h3>获取产品演示</h3>
-                        <p>预约个性化演示，了解栗吉AI如何为您的业务带来革命性改变！</p>
-                        <button class="cta-btn" onclick="window.open('test-bot.html', '_blank')">获取演示</button>
+                    <div style="text-align: center;">
+                        <span style="font-size: 3rem; font-weight: 700; color: var(--chestnut-primary); display: block;">99.9%</span>
+                        <span style="font-size: 1.1rem; color: var(--text-muted);">系统稳定性</span>
                     </div>
-                    <div class="cta-illustration">
-                        <div class="illustration-person person-2">
-                            <div class="person-head"></div>
-                            <div class="person-body"></div>
-                            <div class="person-arm-left"></div>
-                            <div class="person-arm-right"></div>
-                            <div class="chestnut-float">🌰</div>
-                        </div>
+                    <div style="text-align: center;">
+                        <span style="font-size: 3rem; font-weight: 700; color: var(--chestnut-primary); display: block;">50+</span>
+                        <span style="font-size: 1.1rem; color: var(--text-muted);">专业团队</span>
                     </div>
                 </div>
             </div>
@@ -156,43 +450,45 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>栗子AI</h4>
+                    <h4>栗吉科技</h4>
                     <ul>
-                        <li><a href="homepage.html">首页</a></li>
-                        <li><a href="pricing.html">价格</a></li>
-                        <li><a href="test-bot.html">获取演示</a></li>
-                        <li><a href="index.html">聊天机器人</a></li>
-                        <li><a href="#benefits">聊天机器人功能</a></li>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#services">服务</a></li>
+                        <li><a href="#about">关于我们</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>平台功能</h4>
+                    <h4>产品服务</h4>
                     <ul>
-                        <li><a href="#">AI聊天机器人</a></li>
-                        <li><a href="#">移动端支持</a></li>
-                        <li><a href="#">预订引擎</a></li>
-                        <li><a href="#">社交媒体集成</a></li>
+                        <li><a href="chatbot.html">栗子聊天机器人</a></li>
+                        <li><a href="#">数据分析平台</a></li>
+                        <li><a href="#">云计算服务</a></li>
+                        <li><a href="#">企业咨询</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>解决方案</h4>
+                    <ul>
+                        <li><a href="#">AI客服系统</a></li>
+                        <li><a href="#">智能营销</a></li>
+                        <li><a href="#">数字化转型</a></li>
+                        <li><a href="#">移动应用开发</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>支持</h4>
                     <ul>
+                        <li><a href="#">技术支持</a></li>
+                        <li><a href="#">文档中心</a></li>
                         <li><a href="#">常见问题</a></li>
-                        <li><a href="#">帮助中心</a></li>
-                        <li><a href="#">联系支持</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>法律</h4>
-                    <ul>
-                        <li><a href="#">隐私政策</a></li>
                         <li><a href="#">服务条款</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <div class="footer-bottom-left">
-                    <p>&copy; 栗子AI 2025. 保留所有权利.</p>
+                    <p>&copy; 栗吉科技 2025. 保留所有权利.</p>
                 </div>
                 <div class="footer-bottom-right">
                     <span>关注我们</span>
@@ -203,17 +499,10 @@
                         <a href="#" class="social-icon">💼</a>
                         <a href="#" class="social-icon">📺</a>
                     </div>
-                    <div class="chat-widget">
-                        <button class="chat-widget-btn">💬</button>
-                    </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <div id="chatbot-wrapper" style="position: fixed; z-index: 9999; pointer-events: none;">
-        <script src='https://v2-bot.pages.dev/bot.js' data-theme=retro data-bot='website'></script>
-    </div>
 
     <script src="script.js"></script>
 </body>
