@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栗子聊天機器人 - Facebook 集成完成</title>
+    <meta name="description" content="完成您的 Facebook Messenger 与栗子聊天機器人的集成。">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-container {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: var(--gradient-warm);
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius-large);
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            box-shadow: var(--shadow-strong);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 69, 19, 0.1);
+            text-align: center;
+        }
+
+        .integration-title {
+            color: var(--chestnut-primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        /* Loading state */
+        .loading-state .chestnut-spinner {
+            font-size: 4rem;
+            animation: bounce 1.5s ease-in-out infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading-text {
+            color: var(--chestnut-secondary);
+            font-size: 1.2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Page selection state */
+        .page-selection {
+            text-align: left;
+        }
+
+        .selection-title {
+            color: var(--chestnut-primary);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .selection-subtitle {
+            color: var(--chestnut-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-box {
+            background: rgba(139, 69, 19, 0.05);
+            border: 2px solid rgba(139, 69, 19, 0.1);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .page-box:hover {
+            border-color: var(--chestnut-primary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .page-name {
+            color: var(--chestnut-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .bot-selector {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(139, 69, 19, 0.2);
+            border-radius: var(--border-radius);
+            background: white;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .bot-selector:focus {
+            outline: none;
+            border-color: var(--chestnut-primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+        }
+
+        .form-error {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #dc3545;
+        }
+
+        .continue-btn {
+            background: var(--chestnut-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .continue-btn:hover:not(:disabled) {
+            background: var(--chestnut-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .continue-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Success state */
+        .success-state .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-title {
+            color: #28a745;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .test-buttons-section {
+            border-top: 2px solid rgba(139, 69, 19, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .test-section-title {
+            color: var(--chestnut-primary);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .test-buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .test-btn {
+            background: #1877F2;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+        }
+
+        .test-btn:hover {
+            background: #166FE5;
+            transform: translateY(-2px);
+        }
+
+        .dashboard-btn {
+            background: var(--chestnut-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition-smooth);
+            margin-top: 1.5rem;
+        }
+
+        .dashboard-btn:hover {
+            background: var(--chestnut-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Error state */
+        .error-state .error-icon {
+            font-size: 4rem;
+            color: #dc3545;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-title {
+            color: #dc3545;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .error-text {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .retry-btn {
+            background: var(--chestnut-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition-smooth);
+        }
+
+        .retry-btn:hover {
+            background: var(--chestnut-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                padding-top: 80px;
+            }
+            
+            .status-card {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .integration-title {
+                font-size: 1.8rem;
+            }
+            
+            .test-buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .test-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="../" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <div class="chestnut-icon">🌰</div>
+                        <span class="brand-text">栗子</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../" class="nav-link">首页</a></li>
+                <li><a href="../index.html#benefits" class="nav-link">功能</a></li>
+                <li><a href="../test-bot.html" class="nav-link">测试机器人</a></li>
+                <li><a href="../pricing.html" class="nav-link">价格</a></li>
+                <li><a href="../contact.html" class="nav-link">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="container">
+            <h1 class="integration-title">Facebook 集成</h1>
+            
+            <!-- Status container -->
+            <div class="status-card" id='status-container'>
+                <div id="loading" class="loading-state">
+                    <div class="chestnut-spinner">🌰</div>
+                    <p class="loading-text">正在处理您的 Facebook 集成...</p>
+                </div>
+                
+                <div id="page-selection" class="page-selection hidden">
+                    <h2 class="selection-title">将页面连接到聊天机器人</h2>
+                    <p class="selection-subtitle">选择要为每个 Facebook 页面分配的聊天机器人</p>
+                    
+                    <div id="form-error" class="form-error hidden"></div>
+                    
+                    <div id="page-boxes">
+                        <!-- Page boxes will be added here dynamically -->
+                    </div>
+                    
+                    <button id="continue-btn" class="continue-btn" disabled>
+                        继续
+                    </button>
+                </div>
+                
+                <div id="success" class="success-state hidden">
+                    <div class="success-icon">✅</div>
+                    <h2 class="success-title">集成成功！</h2>
+                    <p class="success-text">您的 Facebook 页面已成功连接到栗子聊天機器人。</p>
+                    
+                    <!-- Test buttons will be added here dynamically -->
+                    <div class="test-buttons-section">
+                        <h3 class="test-section-title">测试您连接的页面</h3>
+                        <p>点击下面的按钮在 Messenger 中打开每个页面并测试您的聊天机器人：</p>
+                        <div id="test-buttons-container" class="test-buttons-container">
+                            <!-- Test buttons will be added here -->
+                        </div>
+                    </div>
+                    
+                    <a href="../" class="dashboard-btn">返回主页</a>
+                </div>
+                
+                <div id="error" class="error-state hidden">
+                    <div class="error-icon">❌</div>
+                    <h2 class="error-title">集成失败</h2>
+                    <p id="error-message" class="error-text">连接您的 Facebook 页面时出现错误。</p>
+                    <a href="start.html" class="retry-btn">重试</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>栗子AI</h4>
+                    <ul>
+                        <li><a href="../">首页</a></li>
+                        <li><a href="../pricing.html">价格</a></li>
+                        <li><a href="../test-bot.html">获取演示</a></li>
+                        <li><a href="../index.html">聊天机器人</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="../contact.html">联系支持</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>法律</h4>
+                    <ul>
+                        <li><a href="../privacy-policy.html">隐私政策</a></li>
+                        <li><a href="../terms-of-service.html">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 栗子AI 2025. 保留所有权利.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <span>关注我们</span>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📺</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script>
+        $(document).ready(async function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const callbackResults = JSON.parse(urlParams.get('callback_results'));
+            console.log(callbackResults);
+
+            const pageTokenSetups = {};
+            for (const [page_id, obj] of Object.entries(callbackResults.page_tokens)) {
+                pageTokenSetups[page_id] = {
+                    page_id: page_id,
+                    page_access_token: obj.access_token,
+                    page_name: obj.name,
+                };
+            }
+
+            localStorage.setItem('pageTokenSetups', JSON.stringify(pageTokenSetups));
+
+            const bots = JSON.parse(localStorage.getItem('bot'));
+            const botSecrets = JSON.parse(localStorage.getItem('bot_secret'));
+            const auth_url = localStorage.getItem('auth_url');
+            const auth_started = JSON.parse(localStorage.getItem('auth_started'));
+
+            let errorMessage = '';
+
+            if (auth_started > new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)) {
+                errorMessage = '认证超时。请重试。';
+            } else if (!bots || !botSecrets || !auth_url) {
+                errorMessage = '认证过程中出现问题。请重试。';
+            } else if (Object.values(pageTokenSetups).length === 0) {
+                errorMessage = '找不到页面。请重试。';
+            }
+            
+            if (errorMessage) {
+                $('#loading').addClass('hidden');
+                $('#error').removeClass('hidden');
+                $('#error-message').text(errorMessage);
+                return;
+            }
+
+            // Show page selection UI
+            $('#loading').addClass('hidden');
+            $('#page-selection').removeClass('hidden');
+            
+            // Create page selection boxes
+            const pageBoxes = $('#page-boxes');
+            
+            Object.values(pageTokenSetups).forEach((page, index) => {
+                const pageBox = $(`
+                    <div class="page-box">
+                        <h3 class="page-name">${page.page_name}</h3>
+                        <div class="form-group">
+                            <label>选择聊天机器人：</label>
+                            <select class="bot-selector" data-page-id="${page.page_id}">
+                                <option value="none">无</option>
+                                ${bots.map((bot, i) => `<option value="${i}">${bot}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                `);
+                
+                pageBoxes.append(pageBox);
+            });
+            
+            // Check for duplicates and enable/disable continue button
+            function validateForm() {
+                const selectedBots = {};
+                let hasSelection = false;
+                let duplicateFound = false;
+                
+                $('.bot-selector').each(function() {
+                    const value = $(this).val();
+                    if (value !== 'none') {
+                        hasSelection = true;
+                        
+                        if (selectedBots[value]) {
+                            duplicateFound = true;
+                        } else {
+                            selectedBots[value] = true;
+                        }
+                    }
+                });
+                
+                if (duplicateFound) {
+                    $('#form-error').removeClass('hidden').text('不能将同一个聊天机器人分配给不同的页面。请选择不同的聊天机器人。');
+                    $('#continue-btn').prop('disabled', true);
+                } else {
+                    $('#form-error').addClass('hidden');
+                    $('#continue-btn').prop('disabled', !hasSelection);
+                }
+            }
+            
+            // Add event listeners
+            $('.bot-selector').on('change', validateForm);
+            
+            // Continue button click handler
+            $('#continue-btn').on('click', async function() {
+                $(this).prop('disabled', true).text('处理中...');
+                
+                const pageBotMappings = [];
+                
+                $('.bot-selector').each(function() {
+                    const pageId = $(this).data('page-id');
+                    const botIndex = $(this).val();
+                    
+                    if (botIndex !== 'none') {
+                        const page = pageTokenSetups[pageId];
+                        pageBotMappings.push({
+                            page_id: pageId,
+                            page_access_token: page.page_access_token,
+                            page_name: page.page_name,
+                            bot_secret: botSecrets[botIndex],
+                            bot_name: bots[botIndex]
+                        });
+                    }
+                });
+                
+                let allSuccess = true;
+                
+                // Process all page-bot mappings
+                for (const mapping of pageBotMappings) {
+                    try {
+                        const response = await $.ajax({
+                            url: 'https://messenger-hcai.fly.dev/messenger/auth/set_page_tokens',
+                            type: 'POST',
+                            headers: {
+                                'accept': 'application/json'
+                            },
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                page_id: String(mapping.page_id),
+                                page_access_token: mapping.page_access_token,
+                                page_name: mapping.page_name,
+                                bot_secret: mapping.bot_secret
+                            })
+                        });
+                        
+                        console.log('Success for ' + mapping.page_name + ':', response);
+                    } catch (error) {
+                        console.error('Error for ' + mapping.page_name + ':', error);
+                        allSuccess = false;
+                        break;
+                    }
+                }
+                
+                // Show final status
+                $('#page-selection').addClass('hidden');
+                
+                if (allSuccess) {
+                    // Create test buttons for each connected page
+                    const testButtonsContainer = $('#test-buttons-container');
+                    pageBotMappings.forEach(page => {
+                        const testBtn = $(`
+                            <a href="https://messenger.com/t/${page.page_id}" target="_blank" class="test-btn">
+                                <span>测试 ${page.page_name}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        `);
+                        testButtonsContainer.append(testBtn);
+                    });
+                    
+                    $('#success').removeClass('hidden');
+                } else {
+                    $('#error').removeClass('hidden');
+                    $('#error-message').text('连接一个或多个 Facebook 页面时出现错误。');
+                }
+            });
+            
+            // Initial validation
+            validateForm();
+        });
+    </script>
+</body>
+
+</html> 

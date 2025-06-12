@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐私政策 - 栗子聊天機器人</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-container {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: var(--gradient-warm);
+        }
+
+        .privacy-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .privacy-title {
+            color: var(--chestnut-primary);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-subtitle {
+            color: var(--chestnut-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .privacy-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius-large);
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            box-shadow: var(--shadow-strong);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .section-title {
+            color: var(--chestnut-primary);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--chestnut-light);
+        }
+
+        .section-content {
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .privacy-list li {
+            padding: 0.5rem 0;
+            border-left: 3px solid var(--chestnut-accent);
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(139, 69, 19, 0.03);
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .privacy-list li strong {
+            color: var(--chestnut-primary);
+        }
+
+        .contact-link {
+            color: var(--chestnut-primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-link:hover {
+            border-bottom-color: var(--chestnut-primary);
+        }
+
+        .last-updated {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--chestnut-primary);
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: var(--chestnut-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                padding-top: 80px;
+            }
+            
+            .privacy-content {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .privacy-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <div class="logo-container">
+                        <div class="chestnut-icon">🌰</div>
+                        <span class="brand-text">栗子</span>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">首页</a></li>
+                <li><a href="index.html#benefits" class="nav-link">功能</a></li>
+                <li><a href="test-bot.html" class="nav-link">测试机器人</a></li>
+                <li><a href="pricing.html" class="nav-link">价格</a></li>
+                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="page-container">
+        <div class="privacy-header">
+            <h1 class="privacy-title">隐私政策</h1>
+            <div class="last-updated">最后更新时间：2025年1月1日</div>
+        </div>
+
+        <div class="container">
+            <div class="privacy-content">
+                <div class="section">
+                    <h2 class="section-title">1. 简介</h2>
+                    <p class="section-content">
+                        栗子聊天機器人（"我们"、"我们的"或"我方"）尊重您的隐私，致力于保护您向我们提供的个人信息。本隐私政策解释了当您使用我们的网站、产品和服务（统称"服务"）时，我们如何收集、使用、披露和保护您的信息。
+                    </p>
+                    <p class="section-content">
+                        请仔细阅读本隐私政策。通过访问或使用我们的服务，您确认已阅读、理解并同意受本隐私政策约束。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">2. 我们收集的信息</h2>
+                    <p class="section-content">
+                        我们可能从服务用户那里收集以下几种类型的信息：
+                    </p>
+                    <ul class="privacy-list">
+                        <li><strong>个人信息：</strong> 包括您的姓名、电子邮件地址、电话号码、公司名称以及您在创建账户、订阅我们的服务或联系我们时提供的其他信息。</li>
+                        <li><strong>使用数据：</strong> 关于您如何使用我们服务的信息，包括您与AI聊天机器人的交互、使用的功能以及在我们服务上花费的时间。</li>
+                        <li><strong>聊天对话：</strong> 当客户在您的网站上与我们的AI聊天机器人交互时，我们收集并处理这些对话内容以提供自动回复。</li>
+                        <li><strong>技术数据：</strong> 关于您访问我们服务时的设备、浏览器、IP地址和其他技术详细信息。</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">3. 我们如何使用您的信息</h2>
+                    <p class="section-content">
+                        我们将收集的信息用于各种目的，包括：
+                    </p>
+                    <ul class="privacy-list">
+                        <li>提供、维护和改进我们的服务</li>
+                        <li>处理您的订阅和付款</li>
+                        <li>训练和改进我们的AI模型，以更好地回应客户咨询</li>
+                        <li>与您沟通，包括发送服务更新和促销材料</li>
+                        <li>监控和分析使用模式和趋势以增强用户体验</li>
+                        <li>防范、识别和预防欺诈及其他非法活动</li>
+                        <li>遵守法律义务</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">4. 信息共享</h2>
+                    <p class="section-content">
+                        我们可能在以下情况下共享您的信息：
+                    </p>
+                    <ul class="privacy-list">
+                        <li><strong>服务提供商：</strong> 我们可能与代表我们执行服务的第三方供应商、服务提供商和承包商共享您的信息，他们需要访问您的信息来提供这些服务。</li>
+                        <li><strong>业务转让：</strong> 如果我们参与合并、收购或出售全部或部分资产，您的信息可能作为该交易的一部分被转让。</li>
+                        <li><strong>法律要求：</strong> 如果法律要求或响应公共当局的有效请求，我们可能披露您的信息。</li>
+                        <li><strong>经您同意：</strong> 当您同意时，我们可能与第三方共享您的信息。</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">5. 数据安全</h2>
+                    <p class="section-content">
+                        我们实施适当的技术和组织措施来保护您个人信息的安全。但是，请注意，通过互联网传输的任何方法或电子存储方法都不是100%安全的。
+                    </p>
+                    <p class="section-content">
+                        虽然我们努力使用商业上可接受的方式来保护您的个人信息，但我们不能保证其绝对安全。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">6. 您的权利</h2>
+                    <p class="section-content">
+                        根据您的所在地，您可能对您的个人信息享有某些权利，包括：
+                    </p>
+                    <ul class="privacy-list">
+                        <li>访问我们持有的关于您的个人信息的权利</li>
+                        <li>要求更正任何不准确个人信息的权利</li>
+                        <li>要求删除您个人信息的权利</li>
+                        <li>反对或限制处理您个人信息的权利</li>
+                        <li>数据可携带性的权利</li>
+                    </ul>
+                    <p class="section-content">
+                        要行使这些权利，请使用下面"联系我们"部分提供的信息联系我们。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">7. 儿童隐私</h2>
+                    <p class="section-content">
+                        我们的服务不适用于16岁以下的个人。我们不会故意收集16岁以下儿童的个人信息。如果您发现儿童向我们提供了个人信息，请联系我们，我们将采取措施删除此类信息。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">8. 本隐私政策的变更</h2>
+                    <p class="section-content">
+                        我们可能会不时更新我们的隐私政策。我们将通过在此页面上发布新的隐私政策并更新顶部的"最后更新"日期来通知您任何变更。
+                    </p>
+                    <p class="section-content">
+                        建议您定期查看本隐私政策以了解任何变更。本隐私政策的变更在发布到此页面时生效。
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">9. 联系我们</h2>
+                    <p class="section-content">
+                        如果您对本隐私政策有任何问题，请通过 <a href="mailto:privacy@lizibot.com" class="contact-link">privacy@lizibot.com</a> 联系我们。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>栗子AI</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="pricing.html">价格</a></li>
+                        <li><a href="test-bot.html">获取演示</a></li>
+                        <li><a href="index.html">聊天机器人</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>平台功能</h4>
+                    <ul>
+                        <li><a href="#">AI聊天机器人</a></li>
+                        <li><a href="#">移动端支持</a></li>
+                        <li><a href="#">预订引擎</a></li>
+                        <li><a href="#">社交媒体集成</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="contact.html">联系支持</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>法律</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">隐私政策</a></li>
+                        <li><a href="terms-of-service.html">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 栗子AI 2025. 保留所有权利.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <span>关注我们</span>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📺</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html> 
