@@ -46,8 +46,8 @@
         }
         
         .dropdown-link:hover {
-            background-color: var(--chestnut-cream);
-            color: var(--chestnut-primary);
+            background-color: #e8f0ff;
+            color: #667eea;
         }
         
         .nav-dropdown > .nav-link {
@@ -55,6 +55,7 @@
         }
     </style>
     <style>
+        /* Custom Homepage Color Theme - Blue Purple */
         .org-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 80vh;
@@ -87,11 +88,12 @@
             font-size: 1.5rem;
             margin-bottom: 2rem;
             opacity: 0.9;
+            color: #e8f0ff;
         }
         
         .services-section {
             padding: 5rem 0;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f0ff 100%);
         }
         
         .services-grid {
@@ -107,14 +109,15 @@
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 2px solid transparent;
         }
         
         .service-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+            border: 2px solid #667eea;
         }
         
         .service-card.featured {
@@ -132,15 +135,25 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        .service-card.featured .service-title {
+            color: #fff;
         }
         
         .service-description {
             line-height: 1.6;
             margin-bottom: 1.5rem;
+            color: #4a4a4a;
+        }
+        
+        .service-card.featured .service-description {
+            color: #e8f0ff;
         }
         
         .service-btn {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -149,20 +162,23 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         
         .service-card.featured .service-btn {
             background: white;
             color: #667eea;
+            font-weight: 600;
         }
         
         .service-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
         
         .about-section {
             padding: 5rem 0;
-            background: white;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
         }
         
         .about-content {
@@ -176,7 +192,11 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 2rem;
-            color: #333;
+            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stats-grid {
@@ -195,11 +215,86 @@
             font-weight: 700;
             color: #667eea;
             display: block;
+            text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.3);
         }
         
         .stat-label {
             font-size: 1.1rem;
-            color: #666;
+            color: #764ba2;
+        }
+        
+        /* Override main hero section colors for homepage */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        
+        .hero-title-large {
+            background: linear-gradient(45deg, #fff, #f0f0f0) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .hero-subtitle-large {
+            color: #e8f0ff !important;
+        }
+        
+        .btn-primary-large {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: white !important;
+            font-weight: 600 !important;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+        }
+        
+        .btn-primary-large:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        .btn-secondary-large {
+            background: transparent !important;
+            color: #e8f0ff !important;
+            border: 2px solid #fff !important;
+        }
+        
+        .btn-secondary-large:hover {
+            background: #fff !important;
+            color: #667eea !important;
+        }
+        
+        /* Benefits section override for homepage */
+        .benefits {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f0ff 100%) !important;
+        }
+        
+        .benefit-card {
+            border: 2px solid transparent !important;
+        }
+        
+        .benefit-card:hover {
+            border: 2px solid #667eea !important;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15) !important;
+        }
+        
+        .benefits-title {
+            color: #667eea !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        .benefits-subtitle {
+            color: #764ba2 !important;
+        }
+        
+        /* CTA section override for homepage */
+        .cta-title {
+            color: #667eea !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
         }
     </style>
 </head>
