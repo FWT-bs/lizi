@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>栗子聊天機器人 - Facebook 集成完成</title>
-    <meta name="description" content="完成您的 Facebook Messenger 与栗子聊天機器人的集成。">
+    <meta name="description" content="完成您的 Facebook Messenger 與栗子聊天機器人的集成。">
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- jQuery -->
@@ -320,11 +320,11 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="../" class="nav-link">首页</a></li>
+                <li><a href="../" class="nav-link">首頁</a></li>
                 <li><a href="../index.html#benefits" class="nav-link">功能</a></li>
-                <li><a href="../test-bot.html" class="nav-link">测试机器人</a></li>
-                <li><a href="../pricing.html" class="nav-link">价格</a></li>
-                <li><a href="../contact.html" class="nav-link">联系我们</a></li>
+                <li><a href="../test-bot.html" class="nav-link">測試機器人</a></li>
+                <li><a href="../pricing.html" class="nav-link">價格</a></li>
+                <li><a href="../contact.html" class="nav-link">聯絡我們</a></li>
             </ul>
         </nav>
     </header>
@@ -338,12 +338,12 @@
             <div class="status-card" id='status-container'>
                 <div id="loading" class="loading-state">
                     <div class="chestnut-spinner">🌰</div>
-                    <p class="loading-text">正在处理您的 Facebook 集成...</p>
+                    <p class="loading-text">正在連接您的 Facebook 頁面...</p>
                 </div>
                 
                 <div id="page-selection" class="page-selection hidden">
-                    <h2 class="selection-title">将页面连接到聊天机器人</h2>
-                    <p class="selection-subtitle">选择要为每个 Facebook 页面分配的聊天机器人</p>
+                    <h2 class="selection-title">選擇您的 Facebook 頁面</h2>
+                    <p class="selection-subtitle">請選擇您想要連接的 Facebook 頁面</p>
                     
                     <div id="form-error" class="form-error hidden"></div>
                     
@@ -352,32 +352,42 @@
                     </div>
                     
                     <button id="continue-btn" class="continue-btn" disabled>
-                        继续
+                        繼續
                     </button>
                 </div>
                 
                 <div id="success" class="success-state hidden">
                     <div class="success-icon">✅</div>
-                    <h2 class="success-title">集成成功！</h2>
-                    <p class="success-text">您的 Facebook 页面已成功连接到栗子聊天機器人。</p>
+                    <h2 class="success-title">連接成功！</h2>
+                    <p class="success-text">您的 Facebook 頁面已成功連接到栗子聊天機器人。</p>
                     
                     <!-- Test buttons will be added here dynamically -->
                     <div class="test-buttons-section">
-                        <h3 class="test-section-title">测试您连接的页面</h3>
-                        <p>点击下面的按钮在 Messenger 中打开每个页面并测试您的聊天机器人：</p>
-                        <div id="test-buttons-container" class="test-buttons-container">
-                            <!-- Test buttons will be added here -->
+                        <h3 class="test-section-title">測試您的聊天機器人</h3>
+                        <div class="test-buttons-container">
+                            <a href="#" class="test-btn" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
+                                </svg>
+                                在 Facebook 上測試
+                            </a>
+                            <a href="#" class="test-btn" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/>
+                                </svg>
+                                在 Messenger 上測試
+                            </a>
                         </div>
                     </div>
                     
-                    <a href="../" class="dashboard-btn">返回主页</a>
+                    <a href="../dashboard.html" class="dashboard-btn">前往控制面板</a>
                 </div>
                 
                 <div id="error" class="error-state hidden">
                     <div class="error-icon">❌</div>
-                    <h2 class="error-title">集成失败</h2>
-                    <p id="error-message" class="error-text">连接您的 Facebook 页面时出现错误。</p>
-                    <a href="start.html" class="retry-btn">重试</a>
+                    <h2 class="error-title">連接失敗</h2>
+                    <p id="error-message" class="error-text">抱歉，在連接您的 Facebook 頁面時發生錯誤。請稍後再試。</p>
+                    <a href="start.html" class="dashboard-btn">返回重試</a>
                 </div>
             </div>
         </div>
@@ -390,34 +400,34 @@
                 <div class="footer-section">
                     <h4>栗子AI</h4>
                     <ul>
-                        <li><a href="../">首页</a></li>
-                        <li><a href="../pricing.html">价格</a></li>
-                        <li><a href="../test-bot.html">获取演示</a></li>
-                        <li><a href="../index.html">聊天机器人</a></li>
+                        <li><a href="../">首頁</a></li>
+                        <li><a href="../pricing.html">價格</a></li>
+                        <li><a href="../test-bot.html">獲取演示</a></li>
+                        <li><a href="../index.html">聊天機器人</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>支持</h4>
                     <ul>
-                        <li><a href="#">常见问题</a></li>
-                        <li><a href="#">帮助中心</a></li>
-                        <li><a href="../contact.html">联系支持</a></li>
+                        <li><a href="#">常見問題</a></li>
+                        <li><a href="#">幫助中心</a></li>
+                        <li><a href="../contact.html">聯絡支持</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>法律</h4>
                     <ul>
-                        <li><a href="../privacy-policy.html">隐私政策</a></li>
-                        <li><a href="../terms-of-service.html">服务条款</a></li>
+                        <li><a href="../privacy-policy.html">隱私政策</a></li>
+                        <li><a href="../terms-of-service.html">服務條款</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <div class="footer-bottom-left">
-                    <p>&copy; 栗子AI 2025. 保留所有权利.</p>
+                    <p>&copy; 栗子AI 2025. 保留所有權利.</p>
                 </div>
                 <div class="footer-bottom-right">
-                    <span>关注我们</span>
+                    <span>關注我們</span>
                     <div class="social-icons">
                         <a href="#" class="social-icon">📘</a>
                         <a href="#" class="social-icon">📷</a>
@@ -456,11 +466,11 @@
             let errorMessage = '';
 
             if (auth_started > new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)) {
-                errorMessage = '认证超时。请重试。';
+                errorMessage = '認證超時。請重試。';
             } else if (!bots || !botSecrets || !auth_url) {
-                errorMessage = '认证过程中出现问题。请重试。';
+                errorMessage = '認證過程中出現問題。請重試。';
             } else if (Object.values(pageTokenSetups).length === 0) {
-                errorMessage = '找不到页面。请重试。';
+                errorMessage = '找不到頁面。請重試。';
             }
             
             if (errorMessage) {
@@ -482,9 +492,9 @@
                     <div class="page-box">
                         <h3 class="page-name">${page.page_name}</h3>
                         <div class="form-group">
-                            <label>选择聊天机器人：</label>
+                            <label>選擇聊天機器人：</label>
                             <select class="bot-selector" data-page-id="${page.page_id}">
-                                <option value="none">无</option>
+                                <option value="none">無</option>
                                 ${bots.map((bot, i) => `<option value="${i}">${bot}</option>`).join('')}
                             </select>
                         </div>
@@ -514,7 +524,7 @@
                 });
                 
                 if (duplicateFound) {
-                    $('#form-error').removeClass('hidden').text('不能将同一个聊天机器人分配给不同的页面。请选择不同的聊天机器人。');
+                    $('#form-error').removeClass('hidden').text('不能將同一個聊天機器人分配給不同的頁面。請選擇不同的聊天機器人。');
                     $('#continue-btn').prop('disabled', true);
                 } else {
                     $('#form-error').addClass('hidden');
@@ -527,7 +537,7 @@
             
             // Continue button click handler
             $('#continue-btn').on('click', async function() {
-                $(this).prop('disabled', true).text('处理中...');
+                $(this).prop('disabled', true).text('處理中...');
                 
                 const pageBotMappings = [];
                 
@@ -584,7 +594,7 @@
                     pageBotMappings.forEach(page => {
                         const testBtn = $(`
                             <a href="https://messenger.com/t/${page.page_id}" target="_blank" class="test-btn">
-                                <span>测试 ${page.page_name}</span>
+                                <span>測試 ${page.page_name}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -598,7 +608,7 @@
                     $('#success').removeClass('hidden');
                 } else {
                     $('#error').removeClass('hidden');
-                    $('#error-message').text('连接一个或多个 Facebook 页面时出现错误。');
+                    $('#error-message').text('連接一個或多個 Facebook 頁面時出現錯誤。');
                 }
             });
             
