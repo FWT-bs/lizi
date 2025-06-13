@@ -334,18 +334,22 @@
         </div>
     </footer>
 
-            <script>
-        $(document).ready(function() {
-            const params = new URLSearchParams(window.location.search);
-            const bot = JSON.parse(decodeURIComponent(params.get('bot')));
-            const bot_secret = JSON.parse(decodeURIComponent(params.get('bot_secret')));
-            localStorage.setItem('auth_url', window.location.href);
-            localStorage.setItem('auth_started', JSON.stringify(new Date()));
-            localStorage.setItem('bot_secret', JSON.stringify(bot_secret));
-            localStorage.setItem('bot', JSON.stringify(bot));
-            $('#bot-name').text(bot.join(', '));
-        });
-        </script>
+    <div id="chatbot-wrapper" style="position: fixed; z-index: 9999; pointer-events: none;">
+        <script src='https://v2-bot.pages.dev/bot.js' data-theme=retro data-bot='politician' data-mode='politics'></script>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        const params = new URLSearchParams(window.location.search);
+        const bot = JSON.parse(decodeURIComponent(params.get('bot')));
+        const bot_secret = JSON.parse(decodeURIComponent(params.get('bot_secret')));
+        localStorage.setItem('auth_url', window.location.href);
+        localStorage.setItem('auth_started', JSON.stringify(new Date()));
+        localStorage.setItem('bot_secret', JSON.stringify(bot_secret));
+        localStorage.setItem('bot', JSON.stringify(bot));
+        $('#bot-name').text(bot.join(', '));
+    });
+    </script>
 </body>
 
 </html> 
