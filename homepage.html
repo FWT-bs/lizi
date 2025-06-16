@@ -305,26 +305,26 @@
     <header class="header">
         <nav class="navbar">
             <div class="nav-brand">
-                <a href="homepage.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                     <div class="logo-container">
-                        <div class="chestnut-icon">🌰</div>
-                        <span class="brand-text">栗吉科技</span>
+                        <img src="imgs/logo.png" alt="logo" style="height: 40px; width: auto; display: block;" />
+                        <span class="brand-text">栗子聊天機器人</span>
                     </div>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#benefits" class="nav-link">功能</a></li>
                 <li class="nav-dropdown">
-                    <a href="#" class="nav-link">Platform Features ▲</a>
+                    <a href="#" class="nav-link">應用場景 <span style="font-size:0.9em; margin-left:0.3em;">▼</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html" class="dropdown-link">Chatbot</a></li>
-                        <li><a href="#" class="dropdown-link">Mobile Check-In</a></li>
-                        <li><a href="#" class="dropdown-link">Booking Engine</a></li>
-                        <li><a href="#" class="dropdown-link">Social Media Integrations</a></li>
+                        <li><a href="chatbot.html" class="dropdown-link">栗子聊天機器人</a></li>
+                        <li><a href="#" class="dropdown-link">智能客服系統</a></li>
+                        <li><a href="#" class="dropdown-link">數據分析平台</a></li>
                     </ul>
                 </li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="test-bot.html" class="nav-link">Get Demo</a></li>
+                <li><a href="pricing.html" class="nav-link">價格</a></li>
+                <li><a href="index.html" class="nav-link">關於我們</a></li>
+                <li><a href="contact.html" class="nav-link">聯絡我們</a></li>
             </ul>
         </nav>
     </header>
@@ -351,11 +351,11 @@
                     我们致力于为企业提供创新的AI技术、智能客服系统、数据分析平台等全方位数字化服务
                 </p>
                 <div class="hero-buttons-center">
-                    <button class="btn btn-primary-large" onclick="window.location.href='#services'">
-                        <span>探索我们的服务</span>
+                    <button class="btn btn-primary-large hero-cta-animate" onclick="window.location.href='#services'">
+                        <span>【立即免費試用】</span>
                         <div class="btn-ripple"></div>
                     </button>
-                    <button class="btn btn-secondary-large" onclick="window.location.href='#about'">了解更多</button>
+                    <button class="btn btn-secondary-large hero-cta-animate" onclick="window.location.href='#about'">【看看如何使用】</button>
                 </div>
             </div>
         </div>
@@ -509,5 +509,23 @@
     </div>
 
     <script src="script.js"></script>
+    <style>
+        body {
+            background: var(--gradient-warm);
+            color: var(--text-primary);
+        }
+    </style>
+    <style>
+    .hero-cta-animate {
+        font-size: 1.4rem;
+        padding: 1.5rem 3.5rem;
+        animation: ctaPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.12); }
+        100% { transform: scale(1); }
+    }
+    </style>
 </body>
 </html> 

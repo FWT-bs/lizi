@@ -210,20 +210,28 @@
     <header class="header">
         <nav class="navbar">
             <div class="nav-brand">
-                <a href="../" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                     <div class="logo-container">
-                        <div class="chestnut-icon">🌰</div>
-                        <span class="brand-text">栗子</span>
+                        <img src="../imgs/logo.png" alt="logo" style="height: 40px; width: auto; display: block;" />
+                        <span class="brand-text">栗子聊天機器人</span>
                     </div>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="../" class="nav-link">首頁</a></li>
                 <li><a href="../index.html#benefits" class="nav-link">功能</a></li>
-                <li><a href="../test-bot.html" class="nav-link">測試機器人</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link">應用場景 <span style="font-size:0.9em; margin-left:0.3em;">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../chatbot.html" class="dropdown-link">栗子聊天機器人</a></li>
+                        <li><a href="#" class="dropdown-link">智能客服系統</a></li>
+                        <li><a href="#" class="dropdown-link">數據分析平台</a></li>
+                    </ul>
+                </li>
                 <li><a href="../pricing.html" class="nav-link">價格</a></li>
+                <li><a href="../index.html" class="nav-link">關於我們</a></li>
                 <li><a href="../contact.html" class="nav-link">聯絡我們</a></li>
             </ul>
+            <style>body { background: var(--gradient-warm); color: var(--text-primary); }</style>
         </nav>
     </header>
     
